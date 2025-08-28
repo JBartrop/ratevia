@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from 'react'
+import { Outlet } from "react-router-dom";
 
 
 
 const AuthLayout: React.FC = () => {
     return(
         <section>
-            <h1>AuthLayout</h1>
+            <main>
+                <Outlet />
+            </main>
         </section>
     )
 }
