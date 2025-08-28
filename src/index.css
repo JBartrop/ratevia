@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   @apply bg-[rgb(var(--bg))] text-[rgb(var(--fg))]; 
   margin: 0;

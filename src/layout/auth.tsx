@@ -9,6 +9,7 @@ const AuthLayout: React.FC = () => {
     return(
         <section>
             <main>
+                <h1>auth layout</h1>
                 <Outlet />
             </main>
         </section>
