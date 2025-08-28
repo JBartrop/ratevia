@@ -7,11 +7,8 @@ const AuthLayout: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
     return(
-        <section>
-            <main>
-                <h1>auth layout</h1>
-                <Outlet />
-            </main>
+        <section className='bg-cover flex items-center justify-center w-full h-screen'>
+            <Outlet />
         </section>
     )
 }

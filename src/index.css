@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-[rgb(var(--bg))] text-[rgb(var(--fg))]; 
+  @apply bg-[rgb(var(--background))] text-[rgb(var(--text))];
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -16,17 +16,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
 :root {
-  --bg: 255 255 255;
-  --fg: 17 24 39; /* slate-900-ish */
-  --card: 248 250 252; /* slate-50 */
-  --muted: 100 116 139; /* slate-500 */
+  --background: 240 240 240;       /* #f0f0f0 → softer than pure white */
+  --text: 41 37 36;                /* #292524 */
+  --header-text: 20 20 20;         /* near black */
+  --card: 255 255 255;             /* pure white card pops on toned bg */
+  --muted: 110 110 110;            /* neutral gray */
+  --sidebar: 230 230 230;          /* slightly darker than background */
+  --input: 220 220 220;            /* soft gray */
+  --lines: 170 170 170;            /* visible divider */
+  --primary: 139 223 225;  /* #8bdfe1 */
+  --secondary: 108 207 218;
 }
 
 .dark {
-  --bg: 17 24 39;
-  --fg: 241 245 249; /* slate-100 */
-  --card: 30 41 59; /* slate-800 */
-  --muted: 148 163 184; /* slate-400 */
+  --background: 28 28 28;          /* #1c1c1c → softer than pure black */
+  --text: 225 225 225;             /* light gray text */
+  --header-text: 245 245 245;      /* near white */
+  --card: 40 40 40;                /* slightly lighter than bg for contrast */
+  --muted: 160 160 160;            /* gray for secondary text */
+  --sidebar: 34 34 34;             /* softer sidebar separation */
+  --input: 50 50 50;               /* medium-dark gray */
+  --lines: 95 95 95;               /* visible divider */
+  --primary: 139 223 225;  /* #8bdfe1 */
+  --secondary: 108 207 218;        /* emerald-400 */
 }
