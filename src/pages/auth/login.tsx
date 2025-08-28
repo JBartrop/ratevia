@@ -5,6 +5,9 @@ import { MdMailOutline } from "react-icons/md";
 import { IoKeyOutline } from "react-icons/io5";
 import Button from "../../components/button";
 import { toast } from "react-toastify";
+import { FcGoogle } from "react-icons/fc";
+import { FaApple } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 
 interface LoginProps{
@@ -23,6 +26,7 @@ const LoginValue : LoginProps = {
 const Login: React.FC = () => {
     const [logindata, setLoginData] = useState<LoginProps>(LoginValue)
     const [submitting, setSubmitting] = useState<boolean>(false);
+    const router = useNavigate()
 
     const handleChange =(event:React.ChangeEvent<HTMLInputElement>) => {
         const {name, value, type, checked} = event.target;
@@ -39,11 +43,13 @@ const Login: React.FC = () => {
             console.log(logindata)
             localStorage.setItem("Ratevia", JSON.stringify(logindata))
             await new Promise<void>((res) => setTimeout(res, Math.random() * 2000))
-            toast.success("login successful")
+            toast.success("login successfull")
+            router("/auth/otp")
             setSubmitting(false)
         }catch(error:any){
             console.log(error.message)
             toast.error("could not login")
+            setSubmitting(false)
         }
         finally{
             setSubmitting(false)
@@ -98,7 +104,7 @@ const Login: React.FC = () => {
                     />
                     <p className="text-sm sm:text-base">Remember Me</p>
                 </div>
-                <div><a href="/auth/forgotten-password" className="text-sm sm:text-base hover:text-[rgb(var(--secondary))]">forgotten password?</a></div>
+                <div><a href="/auth/forgotten-password" className="text-sm sm:text-base hover:text-[rgb(var(--primary))] text-[rgb(var(--secondary))]">forgotten password?</a></div>
             </div>
             <Button
                 varaint="primary"
@@ -109,6 +115,42 @@ const Login: React.FC = () => {
                 loading={submitting}
                 onClick={submitForm}
             />
+
+            <div className="my-6 flex items-center justify-center gap-2">
+                <div className="h-px bg-gray-300 w-full" />
+                <p className="text-sm text-gray-500">or</p>
+                <div className="h-px bg-gray-300 w-full" />
+            </div>
+
+            <div className="flex flex-col gap-4">
+                <button
+                  type="button"
+                  onClick={() => alert("Google login")}
+                  className="flex items-center justify-center gap-3 border border-gray-300 rounded-md py-2 w-full hover:bg-gray-100 transition"
+                >
+                    {(() => {
+                        const Icon = FcGoogle as React.ComponentType <{ size?: number }>;
+                        return <Icon size={20} />
+                    })()}
+
+                    <span className="text-sm font-medium text-gray-700">Continue with Google</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => alert("Apple login")}
+                  className="flex items-center justify-center gap-3 border border-gray-300 rounded-md py-2 w-full hover:bg-gray-100 transition"
+                >
+                    {(() => {
+                        const Icon = FaApple as React.ComponentType <{ size?: number }>;
+                        return <Icon size={20} />
+                    })()}
+                    <span className="text-sm font-medium text-gray-700">Continue with Apple</span>
+                </button>
+            </div>
+
+
+            <div className="mt-4">Don't have an account? <a href="/auth/register" className="text-sm sm:text-base hover:text-[rgb(var(--primary))] text-[rgb(var(--secondary))]"> Register</a></div>
         </section>
     )
 }

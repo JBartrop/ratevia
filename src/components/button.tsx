@@ -14,9 +14,9 @@ interface ButttonProps{
 const Button: React.FC <ButttonProps> = ({varaint, size, loading, value, disabled, className, onClick}) => {
 
     const variantClasses: Record<"primary" | "secondary" | "ghost", string> = {
-        primary: " bg-[rgb(var(--primary))]  text-[rgb(var(--text))]",
-        secondary: " bg-[rgb(var(--secondary))] text-[rgb(var(--text))]",
-        ghost: "bg-[rgb(var(--muted))] text-[rgb(var(--text))]",
+        primary: " bg-[rgb(var(--primary))]  text-[rgb(var(--buttonText)]",
+        secondary: " bg-[rgb(var(--secondary))] text-[rgb(var(--buttonText))]",
+        ghost: "bg-[rgb(var(--muted))] text-[rgb(var(--buttonText))]",
     };
 
     const sizeClasses: Record<"sm" | "md" | "lg", string> = {
@@ -33,7 +33,7 @@ const Button: React.FC <ButttonProps> = ({varaint, size, loading, value, disable
             <button
             disabled={isDisabled}
             onClick={onClick}
-            className={`flex justify-center items-center ${className} ${variantClasses[varaint]} ${sizeClasses[size]} ${isDisabled && 'opacity-50 cursor-not-allowed'}`}
+            className={`flex justify-center items-center ${className} ${variantClasses[varaint]} ${sizeClasses[size]} ${isDisabled && 'opacity-75 cursor-not-allowed'}`}
             >
                 {loading && (
                     <svg

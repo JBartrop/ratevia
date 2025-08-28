@@ -27,11 +27,12 @@ code {
   --lines: 170 170 170;            /* visible divider */
   --primary: 139 223 225;  /* #8bdfe1 */
   --secondary: 108 207 218;
+  --buttonText:  28 28 28; 
 }
 
 .dark {
   --background: 28 28 28;          /* #1c1c1c → softer than pure black */
-  --text: 225 225 225;             /* light gray text */
+  --text: 250 250 250;             /* light gray text */
   --header-text: 245 245 245;      /* near white */
   --card: 40 40 40;                /* slightly lighter than bg for contrast */
   --muted: 160 160 160;            /* gray for secondary text */
@@ -39,5 +40,6 @@ code {
   --input: 50 50 50;               /* medium-dark gray */
   --lines: 95 95 95;               /* visible divider */
   --primary: 139 223 225;  /* #8bdfe1 */
-  --secondary: 108 207 218;        /* emerald-400 */
+  --secondary: 108 207 218; 
+  --buttonText:  240 240 240;     /* emerald-400 */
 }
