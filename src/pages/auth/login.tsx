@@ -22,19 +22,52 @@ const LoginValue : LoginProps = {
      rememberMe: false,
 }
 
+interface ErrorProps{
+    email:string;
+    password: string;
+}
+
+const ErrorValue : ErrorProps = {
+    email: "",
+    password: "",
+}
+
 
 const Login: React.FC = () => {
     const [logindata, setLoginData] = useState<LoginProps>(LoginValue)
     const [submitting, setSubmitting] = useState<boolean>(false);
+    const [iserror, setIserror] = useState<ErrorProps>(ErrorValue);
     const router = useNavigate()
 
     const handleChange =(event:React.ChangeEvent<HTMLInputElement>) => {
         const {name, value, type, checked} = event.target;
+        const fieldValue = type === "checkbox" ? checked : value;
+        const errormessage = validateUser(name, value)
         setLoginData((prevData) => ({
             ...prevData,
-            [name]: type === "checkbox" ? checked : value,
+            [name]: fieldValue,
+        }))
+
+        setIserror((prevError) => ({
+            ...prevError,
+            [name]: errormessage
         }))
     }
+
+
+    const validateUser = (errortype:string, value: string) => {
+        switch(errortype){
+            case "email":
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) return "Invalid email address";
+                return "";
+                case "password":
+                if (value.length < 6) return "Password must be at least 6 characters";
+                return "";
+            default:
+            return "";
+        }
+    };
 
     const submitForm = async (): Promise<void> => {
         setSubmitting(true)
@@ -58,10 +91,12 @@ const Login: React.FC = () => {
 
     const formComplete = 
     logindata.email.trim() !== "" &&
-    logindata.password.trim() !== "";
+    logindata.password.trim() !== "" &&
+    validateUser("email", logindata.email) === "" &&
+        validateUser("password", logindata.password) === "" ;
 
     return(
-        <section className="text-[rgb(var(--text))] bg-[rgb(var(--card))] rounded-lg p-8 m-8 lg:w-2/5 sm:w-4/6 w-full  overflow-hidden">
+        <section className="text-[rgb(var(--text))] bg-[rgb(var(--card))] rounded-lg p-4  w-[450px] my-10  overflow-hidden">
             <h1 className="uppercase text-2xl  mb-4 font-semibold">Login</h1>
             <Input
                 label="Email"
@@ -72,8 +107,10 @@ const Login: React.FC = () => {
                 size="sm"
                 onChange={handleChange}
                 icon={true}
+                onerror={true}
+                errorMessage={iserror.email}
                 showicon={(() => {
-                    const Icon = FaRegUser as React.ComponentType<{ size?: number }>;
+                    const Icon = MdMailOutline as React.ComponentType<{ size?: number }>;
                     return <Icon size={20} />;
                 })()}
             />
@@ -87,6 +124,8 @@ const Login: React.FC = () => {
                 onChange={handleChange}
                 icon={true}
                 password={true}
+                onerror={true}
+                errorMessage={iserror.password}
                 showicon={(() => {
                     const Icon = IoKeyOutline as React.ComponentType<{ size?: number }>;
                     return <Icon size={20} />;
@@ -110,7 +149,7 @@ const Login: React.FC = () => {
                 varaint="primary"
                 size="sm"
                 disabled={!formComplete || submitting}
-                value="login"
+                value="Log in"
                 className="w-full"
                 loading={submitting}
                 onClick={submitForm}
@@ -125,7 +164,7 @@ const Login: React.FC = () => {
             <div className="flex flex-col gap-4">
                 <button
                   type="button"
-                  onClick={() => alert("Google login")}
+                  onClick={() => alert("Google login not implmented")}
                   className="flex items-center justify-center gap-3 border border-gray-300 rounded-md py-2 w-full hover:bg-gray-100 transition"
                 >
                     {(() => {
@@ -135,22 +174,10 @@ const Login: React.FC = () => {
 
                     <span className="text-sm font-medium text-gray-700">Continue with Google</span>
                 </button>
-
-                <button
-                  type="button"
-                  onClick={() => alert("Apple login")}
-                  className="flex items-center justify-center gap-3 border border-gray-300 rounded-md py-2 w-full hover:bg-gray-100 transition"
-                >
-                    {(() => {
-                        const Icon = FaApple as React.ComponentType <{ size?: number }>;
-                        return <Icon size={20} />
-                    })()}
-                    <span className="text-sm font-medium text-gray-700">Continue with Apple</span>
-                </button>
             </div>
 
 
-            <div className="mt-4">Don't have an account? <a href="/auth/register" className="text-sm sm:text-base hover:text-[rgb(var(--primary))] text-[rgb(var(--secondary))]"> Register</a></div>
+            <div className="mt-4">Don't have an account? <a href="/auth/register" className="text-sm sm:text-base hover:text-[rgb(var(--primary))] text-[rgb(var(--secondary))]"> Sign up</a></div>
         </section>
     )
 }

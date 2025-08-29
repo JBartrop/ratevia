@@ -13,7 +13,8 @@ interface InputProps{
     size: "sm" | "md" | "lg";
     onChange?: (event:React.ChangeEvent<HTMLInputElement>) => void;
     password?:boolean;
-    error?: boolean;
+    onerror?: boolean;
+    errorMessage?:string;
     success?: boolean;
     // requiredField?:boolean;
     disabled?:boolean;
@@ -25,7 +26,7 @@ interface InputProps{
 
 
 
-const Input: React.FC <InputProps> = ({label, type, name, placeholder, value, size, onChange, disabled, password, icon, showicon, className, checked}) => {
+const Input: React.FC <InputProps> = ({label, type, name, placeholder, value, size, onChange, disabled, password, icon, showicon, className, checked, onerror, errorMessage}) => {
     const [showpassword, setShowpassword] = useState<boolean>(false)
 
     const sizeClasses: Record<"sm" | "md" | "lg", string> = {
@@ -53,7 +54,7 @@ const Input: React.FC <InputProps> = ({label, type, name, placeholder, value, si
                 disabled={disabled}
                 onChange={onChange}
                 checked={checked}
-                className={`w-full border-[rgb(var(--muted))] bg-[rgb(var(--background))] focus:ring focus:ring-blue-200 py-3 my-3 outline-none transition ${icon ? "px-12" : "px-0"} ${sizeClasses[size]} ${className}`}
+                className={`w-full border-[rgb(var(--muted))] bg-[rgb(var(--background))] focus:ring-1 focus:ring-blue-200 py-3 my-3 outline-none transition ${icon ? "px-12" : "px-0"} ${sizeClasses[size]} ${className}`}
             />
                 {password && (
                     <button onClick={() => setShowpassword(prev => !prev)} className="absolute inset-y-0 right-0 flex items-center pr-6" >
@@ -64,6 +65,7 @@ const Input: React.FC <InputProps> = ({label, type, name, placeholder, value, si
                     </button>
                 )}
             </div>
+            {onerror && <p className="text-red-400 text-sm text-start">{errorMessage}</p>}
         </div>
     )
 }
