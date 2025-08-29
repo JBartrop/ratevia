@@ -97,7 +97,7 @@ const Login: React.FC = () => {
 
     return(
         <section className="text-[rgb(var(--text))] bg-[rgb(var(--card))] rounded-lg p-4  w-[450px] my-10  overflow-hidden">
-            <h1 className="uppercase text-2xl  mb-4 font-semibold">Login</h1>
+            <h1 className="uppercase text-2xl  mb-4 font-semibold text-center">Login</h1>
             <Input
                 label="Email"
                 name="email"
@@ -177,7 +177,7 @@ const Login: React.FC = () => {
             </div>
 
 
-            <div className="mt-4">Don't have an account? <a href="/auth/register" className="text-sm sm:text-base hover:text-[rgb(var(--primary))] text-[rgb(var(--secondary))]"> Sign up</a></div>
+            <div className="mt-4 text-center">Don't have an account? <a href="/auth/register" className="text-sm sm:text-base hover:text-[rgb(var(--primary))] text-[rgb(var(--secondary))]"> Sign up</a></div>
         </section>
     )
 }

@@ -49,7 +49,7 @@ const OtpInput: React.FC<OtpInputProps> = ({ length }) => {
             console.log(code)
             toast.success("otp successfull")
             await new Promise<void>((res) => setTimeout(res, Math.random() * 3000));
-            router("/")
+            router("/dashboard")
             setSubmitting(false)
         }catch(error:any){
             console.log(error.message)

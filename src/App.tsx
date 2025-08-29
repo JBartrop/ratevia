@@ -2,7 +2,7 @@ import React from 'react';
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import './App.css';
+// import './App.css';
 import MainLayout from './layout/main';
 import Error from './pages/error';
 import Dashboard from './pages/dashboard';
@@ -12,6 +12,8 @@ import Login from './pages/auth/login';
 import ForgottenPassword from './pages/auth/forgotten-password';
 import Otp from './pages/auth/otp';
 import ProtectedRoute from './components/protectedRoute';
+import Ratevia from './pages/ratevia';
+import DashboardLayout from './layout/dashboard';
 
 const router = createBrowserRouter([
   {
@@ -21,10 +23,20 @@ const router = createBrowserRouter([
     children:[
       {
         path: "/",
-        element: (
-        <ProtectedRoute>
-          <Dashboard />
-        </ProtectedRoute>
+        element: <Ratevia />
+      },
+    ]
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path:"/dashboard",
+        element:(
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
         )
       },
     ]

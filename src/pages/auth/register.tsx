@@ -112,7 +112,7 @@ const Register: React.FC = () => {
 
     return(
         <section className="text-[rgb(var(--text))] bg-[rgb(var(--card))] rounded-lg p-4  w-[450px] my-10  overflow-hidden">
-            <h1 className="uppercase text-2xl  mb-4 font-semibold">Create your account</h1>
+            <h1 className="uppercase text-2xl  mb-4 font-semibold text-center">Create your account</h1>
             <Input
                 label="Full name"
                 name="name"
@@ -207,7 +207,7 @@ const Register: React.FC = () => {
             </div>
 
 
-            <div className="mt-4">Already have an account? <a href="/auth/login" className="text-sm sm:text-base hover:text-[rgb(var(--primary))] text-[rgb(var(--secondary))]"> Login</a></div>
+            <div className="mt-4 text-center">Already have an account? <a href="/auth/login" className="text-sm sm:text-base hover:text-[rgb(var(--primary))] text-[rgb(var(--secondary))]"> Login</a></div>
         </section>
     )
 }

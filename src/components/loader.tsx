@@ -30,7 +30,7 @@ const Loader: React.FC = () => {
                     <div className="flex flex-col items-center  gap-6">
                         <div className="w-24 h-24 border-4 border-t-transparent border-[rgb(var(--primary))] rounded-full animate-spin"></div>
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <img src={"apple-touch-icon.png"} alt={"rateviaImage"} width={50} height={50} />
+                            <img src={"/apple-touch-icon.png"} alt={"rateviaImage"} width={50} height={50} />
                         </div>
                         
                     </div>
