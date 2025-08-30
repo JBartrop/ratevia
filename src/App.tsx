@@ -89,7 +89,7 @@ const App:React.FC =() => {
   return (
     <div className="App">
       <RouterProvider router={router} />
-      <ToastContainer autoClose={200} closeButton={true} hideProgressBar={true} position="top-center"  />
+      <ToastContainer autoClose={300} closeButton={true} hideProgressBar={true} position="top-center"  />
     </div>
   );
 }
