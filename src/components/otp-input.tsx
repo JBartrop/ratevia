@@ -1,18 +1,14 @@
 import React, { useRef, useState } from "react";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom"
-import Button from "./button";
 
 
 interface OtpInputProps {
   length: number;
+  onChange: (otp: string[]) => void;
 }
 
-const OtpInput: React.FC<OtpInputProps> = ({ length }) => {
+const OtpInput: React.FC<OtpInputProps> = ({ length, onChange}) => {
 
     const [otp, setOtp] = useState<string[]>(new Array(length).fill(""));
-    const [submitting, setSubmitting] = useState<boolean>(false);
-    const router = useNavigate()
     
 
     const inputRefs = useRef<(HTMLInputElement | null)[]>(
@@ -24,6 +20,7 @@ const OtpInput: React.FC<OtpInputProps> = ({ length }) => {
         const newOtp = [...otp];
         newOtp[index] = value.slice(-1);
         setOtp(newOtp);
+        onChange(newOtp);
 
         if (value && index < length - 1) {
             inputRefs.current[index + 1]?.focus();
@@ -39,33 +36,11 @@ const OtpInput: React.FC<OtpInputProps> = ({ length }) => {
         }
     };
 
-    const handleSave = async (): Promise<void> => {
-        setSubmitting(true)
-        try{
-            await new Promise<void>((res) => setTimeout(res, Math.random() * 2000));
-            const newOtp = [...otp];
-            const stringOtp = newOtp.join("");
-            const code = stringOtp; 
-            console.log(code)
-            toast.success("otp successfull")
-            await new Promise<void>((res) => setTimeout(res, Math.random() * 3000));
-            router("/dashboard")
-            setSubmitting(false)
-        }catch(error:any){
-            console.log(error.message)
-            toast.error("incorrect otp")
-            setSubmitting(false)
-        }finally{
-            setSubmitting(false)
-        }
-    }
 
-    const isFormComplete = otp.join("").length === length;
 
 
     return(
-        <form method="POST" action="/" >
-            <div className="flex justify-center gap-2">
+        <div className="flex justify-center gap-2">
             {otp.map((data, index) => {
             return (
             <input
@@ -80,21 +55,11 @@ const OtpInput: React.FC<OtpInputProps> = ({ length }) => {
                 inputRefs.current[index] = el;
               }}
               pattern="[0-9]*"
-              className="w-12 h-12 text-center border border-gray-300 rounded-md text-xl focus:border-blue-500 outline-none"
+              className="w-12 h-12 text-center bg-[rgb(var(--background))] text-[rgb(var(--text))] border border-gray-300 rounded-md text-xl focus:border-blue-300 outline-none"
             />
             );
             })}
-            </div>
-            <Button
-                varaint="primary"
-                size="sm"
-                disabled={!isFormComplete ||  submitting}
-                value="login"
-                className="w-full mt-5"
-                loading={submitting}
-                onClick={handleSave}
-            />
-        </form>
+        </div>
     )
 }
 

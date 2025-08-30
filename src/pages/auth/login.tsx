@@ -19,7 +19,7 @@ interface LoginProps{
 const LoginValue : LoginProps = {
     email: "",
     password: "",
-     rememberMe: false,
+    rememberMe: false,
 }
 
 interface ErrorProps{
@@ -38,6 +38,12 @@ const Login: React.FC = () => {
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [iserror, setIserror] = useState<ErrorProps>(ErrorValue);
     const router = useNavigate()
+
+    const onlyUser = {
+        email: "johnbartrop@gmail.com",
+        password: "123456",
+        rememberMe: true,
+    }
 
     const handleChange =(event:React.ChangeEvent<HTMLInputElement>) => {
         const {name, value, type, checked} = event.target;
@@ -74,14 +80,19 @@ const Login: React.FC = () => {
         try{
             await new Promise<void>((res) => setTimeout(res, Math.random() * 2000))
             console.log(logindata)
-            localStorage.setItem("Ratevia", JSON.stringify(logindata))
-            await new Promise<void>((res) => setTimeout(res, Math.random() * 2000))
-            toast.success("login successfull")
-            router("/auth/otp")
-            setSubmitting(false)
+            if (onlyUser.email === logindata.email && onlyUser.password === logindata.password && onlyUser.rememberMe === logindata.rememberMe){
+                localStorage.setItem("Ratevia", JSON.stringify(logindata))
+                await new Promise<void>((res) => setTimeout(res, Math.random() * 2000))
+                toast.success("login successfull")
+                router("/auth/otp")
+                setSubmitting(false)
+            }else{
+                toast.error("Incorrect email or password")
+                setSubmitting(false)
+            }
         }catch(error:any){
             console.log(error.message)
-            toast.error("could not login")
+            toast.error("Incorrect user or password")
             setSubmitting(false)
         }
         finally{
@@ -93,7 +104,7 @@ const Login: React.FC = () => {
     logindata.email.trim() !== "" &&
     logindata.password.trim() !== "" &&
     validateUser("email", logindata.email) === "" &&
-        validateUser("password", logindata.password) === "" ;
+    validateUser("password", logindata.password) === "" ;
 
     return(
         <section className="text-[rgb(var(--text))] bg-[rgb(var(--card))] rounded-lg p-4  w-[450px] my-10  overflow-hidden">
