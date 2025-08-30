@@ -4,7 +4,7 @@ import Loader from '../components/loader';
 
 
 
-const MainLayout: React.FC = () => {
+const DashboardLayout: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -20,10 +20,11 @@ const MainLayout: React.FC = () => {
     return(
         <section>
             <main>
+                <h1>DashboardLayout</h1>
                 <Outlet />
             </main>
         </section>
     )
 }
 
-export default MainLayout;
+export default DashboardLayout;
