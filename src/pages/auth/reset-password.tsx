@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const ForgottenPassword: React.FC = () => {
+const ResetPassword: React.FC = () => {
     return(
         <section className="text-[rgb(var(--text))] bg-[rgb(var(--card))] rounded-lg p-4  w-[450px] my-10  overflow-hidden">
-            <h1>ForgottenPassword</h1>
+            <h1>ResetPassword</h1>
         </section>
     )
 }
 
-export default ForgottenPassword;
+export default ResetPassword;

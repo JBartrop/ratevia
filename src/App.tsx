@@ -2,18 +2,26 @@ import React from 'react';
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-// import './App.css';
+//layout imports
 import MainLayout from './layout/main';
-import Error from './pages/error';
-import Dashboard from './pages/dashboard';
 import AuthLayout from './layout/auth';
+import DashboardLayout from './layout/dashboard';
+//Auth imports
 import Register from './pages/auth/register';
 import Login from './pages/auth/login';
 import ForgottenPassword from './pages/auth/forgotten-password';
 import Otp from './pages/auth/otp';
-import ProtectedRoute from './components/protectedRoute';
+import ForgottenPasswordOtp from './pages/auth/forgotten-password-otp';
+import ResetPassword from './pages/auth/reset-password';
+//pages import
+import Error from './pages/error';
+import Dashboard from './pages/dashboard';
 import Ratevia from './pages/ratevia';
-import DashboardLayout from './layout/dashboard';
+//protext route
+import ProtectedRoute from './components/protectedRoute';
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -60,7 +68,15 @@ const router = createBrowserRouter([
       {
         path: "otp",
         element: <Otp />
-      }
+      },
+      {
+        path: "forgotten-password-otp",
+        element: <ForgottenPasswordOtp />
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />
+      },
     ]
   },
   {
