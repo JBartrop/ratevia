@@ -13,11 +13,17 @@ import ForgottenPassword from './pages/auth/forgotten-password';
 import Otp from './pages/auth/otp';
 import ForgottenPasswordOtp from './pages/auth/forgotten-password-otp';
 import ResetPassword from './pages/auth/reset-password';
+//dashboard pages import
+import Dashboard from './pages/dashboard/dashboard';
+import Notifications from './pages/dashboard/notifications';
+import Task from './pages/dashboard/task';
+import Schedule from './pages/dashboard/schedule';
+import Account from './pages/dashboard/account';
+import Settings from './pages/dashboard/settings';
 //pages import
 import Error from './pages/error';
-import Dashboard from './pages/dashboard';
 import Ratevia from './pages/ratevia';
-//protext route
+//protect route
 import ProtectedRoute from './components/protectedRoute';
 
 
@@ -38,6 +44,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardLayout />,
+    errorElement: <Error />,
     children: [
       {
         path:"/dashboard",
@@ -47,6 +54,47 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         )
       },
+      {
+        path:"schedule",
+        element:(
+          <ProtectedRoute>
+            <Schedule />
+          </ProtectedRoute>
+        )
+      },
+      {
+        path:"task",
+        element:(
+          <ProtectedRoute>
+            <Task />
+          </ProtectedRoute>
+        )
+      },
+      {
+        path:"notification",
+        element:(
+          <ProtectedRoute>
+            <Notifications />
+          </ProtectedRoute>
+        )
+      },
+      {
+        path:"account",
+        element:(
+          <ProtectedRoute>
+            <Account />
+          </ProtectedRoute>
+        )
+      },
+      {
+        path:"setting",
+        element:(
+          <ProtectedRoute>
+            <Settings />
+          </ProtectedRoute>
+        )
+      },
+
     ]
   },
   {
