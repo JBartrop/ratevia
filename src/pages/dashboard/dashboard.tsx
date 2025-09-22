@@ -1,5 +1,5 @@
 import React from "react";
-import ThemeToggle from "../components/toggle";
+import ThemeToggle from "../../components/toggle";
 
 
 
