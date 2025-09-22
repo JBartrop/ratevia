@@ -7,10 +7,11 @@ const Task : React.FC = () => {
         <section className="w-full">
             <div className="mb-4 flex justify-between items-center">
                 <div>
-                    <h1 >Task</h1>
+                    <h1 >Name</h1>
                 </div>
-                <div>
-                    <p>here</p>
+                <div className="flex">
+                    <p>filter</p>
+                    <p>search</p>
                 </div>
             </div>
             

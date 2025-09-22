@@ -45,7 +45,7 @@ const Table: React.FC<TableProps> = ({loading, header, data, className, actions}
                             </th>
                         ))}  
                         {actions && actions.length > 0 && (
-                            <th className="px-4 py-2 text-left text-sm font-semibold text-[rgb(var(--text))]">Actions</th>
+                            <th className="px-4 py-2 pr-10 text-right text-sm font-semibold text-[rgb(var(--text))]">Actions</th>
                         )}
                     </tr>
                 </thead>
@@ -60,7 +60,7 @@ const Table: React.FC<TableProps> = ({loading, header, data, className, actions}
                                     </td>
                                 ))}
                                 {actions && actions.length > 0 && (
-                                    <td className="px-4 py-2 border-t text-sm text-[rgb(var(--text))] flex gap-2">
+                                    <td className="px-4 py-2 border-t text-sm text-[rgb(var(--text))] flex justify-end gap-2">
                                         {actions.map((action, i) => (
                                           <button
                                             key={i}
