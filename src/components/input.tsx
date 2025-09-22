@@ -42,7 +42,7 @@ const Input: React.FC <InputProps> = ({label, type, name, placeholder, value, si
             <p className="text-start font-semibold">{label}</p>
             <div className="relative">
                 {icon && (
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-4 text-sm " >
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-4 text-sm text-[rgb(var(--secondary))] " >
                         {showicon}
                     </div>
                 )}
@@ -57,7 +57,7 @@ const Input: React.FC <InputProps> = ({label, type, name, placeholder, value, si
                 className={`w-full border-[rgb(var(--muted))] bg-[rgb(var(--background))] focus:ring-1 focus:ring-blue-200 py-3 my-3 outline-none transition ${icon ? "px-12" : "px-0"} ${sizeClasses[size]} ${className}`}
             />
                 {password && (
-                    <button onClick={() => setShowpassword(prev => !prev)} className="absolute inset-y-0 right-0 flex items-center pr-6" >
+                    <button onClick={() => setShowpassword(prev => !prev)} className="absolute inset-y-0 right-0 flex items-center pr-6 text-[rgb(var(--secondary))]" >
                     {(() => {
                         const Icon = (showpassword ? FiEyeOff : FiEye) as React.ComponentType<{ size?: number }>;
                         return <Icon size={20} />;

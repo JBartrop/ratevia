@@ -45,6 +45,7 @@ const Login: React.FC = () => {
         rememberMe: true,
     }
 
+    //does  not go to otp again unless forgotten password or login with mail feature
     const handleChange =(event:React.ChangeEvent<HTMLInputElement>) => {
         const {name, value, type, checked} = event.target;
         const fieldValue = type === "checkbox" ? checked : value;
@@ -84,7 +85,7 @@ const Login: React.FC = () => {
                 localStorage.setItem("Ratevia", JSON.stringify(logindata))
                 await new Promise<void>((res) => setTimeout(res, Math.random() * 2000))
                 toast.success("login successfull")
-                router("/auth/otp")
+                router("/dashboard")
                 setSubmitting(false)
             }else{
                 toast.error("Incorrect email or password")
