@@ -48,51 +48,27 @@ const router = createBrowserRouter([
     children: [
       {
         path:"/dashboard",
-        element:(
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        )
+        element: <Dashboard />
       },
       {
         path:"schedule",
-        element:(
-          <ProtectedRoute>
-            <Schedule />
-          </ProtectedRoute>
-        )
+        element:<Schedule />
       },
       {
         path:"task",
-        element:(
-          <ProtectedRoute>
-            <Task />
-          </ProtectedRoute>
-        )
+        element:<Task />
       },
       {
         path:"notification",
-        element:(
-          <ProtectedRoute>
-            <Notifications />
-          </ProtectedRoute>
-        )
+        element:<Notifications />
       },
       {
         path:"account",
-        element:(
-          <ProtectedRoute>
-            <Account />
-          </ProtectedRoute>
-        )
+        element:<Account />
       },
       {
         path:"setting",
-        element:(
-          <ProtectedRoute>
-            <Settings />
-          </ProtectedRoute>
-        )
+        element:<Settings />
       },
 
     ]
