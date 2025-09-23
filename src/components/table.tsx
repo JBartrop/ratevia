@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import Button from "./button";
 
 
 
@@ -30,13 +31,47 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = ({loading, header, data, className, actions}) => {
 
+    const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+
+    const tableoptions = [
+        {name:"10" },
+        {name:"15" }, 
+        {name:"20" },
+        {name:"25" },
+        {name:"50" },
+    ]
+
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
+
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const lastItemIndex = currentPage * itemsPerPage; 
+    const startItemIndex =  lastItemIndex - itemsPerPage;
+    const currentItems = data.slice(startItemIndex, lastItemIndex)
+
+
     if (loading) {
         return <p className="text-gray-500">Loading...</p>;
     }
     return(
         <section className={`w-full  ${className ?? ""}`}>
             <div className="overflow-x-auto">
-            <table className="min-w-full overflow-x-auto border bg-[rgb(var(--card))] p-4 border-gray-200 rounded-md">
+            <div className="flex items-center gap-2 px-2 py-4">
+                <span>Show</span>
+                <select
+                value={itemsPerPage}
+                onChange={(e) => {setItemsPerPage(Number(e.target.value)); setCurrentPage(1);}}
+                 className=" outline-none px-3 py-1 border border-gray-300 rounded-md text-sm bg-white shadow-sm"
+                >
+                    {tableoptions.map((opt) => (
+                        <option 
+                        value={opt.name} 
+                        key={opt.name} 
+                        className="bg-white outline-none border-none text-gray-700 hover:bg-green-100">{opt.name}</option>
+                    ))}
+                </select>
+            </div>
+            <table className="min-w-full overflow-x-auto border border-gray-200 rounded-md">
                 <thead>
                     <tr>
                         {header.map((h) => (
@@ -51,8 +86,8 @@ const Table: React.FC<TableProps> = ({loading, header, data, className, actions}
                 </thead>
                 <tbody>
                     
-                    {data.length > 0 ? (
-                        data.map((row) => (
+                    {currentItems.length > 0 ? (
+                        currentItems.map((row) => (
                             <tr key={row.id} className="hover:bg-gray-100">
                                 {header.map((col) => (
                                     <td key={col.id}  className="px-4 py-2 border-t text-sm text-[rgb(var(--text))]">
@@ -84,6 +119,30 @@ const Table: React.FC<TableProps> = ({loading, header, data, className, actions}
                     
                 </tbody>
             </table>
+            <p className="pt-4 text-center text-sm text-[rgb(var(--text))]/50">A list of all data</p>
+            <div className="flex justify-between items-center my-6">
+                <div>
+                    <div>
+                        showing {startItemIndex + 1} to {Math.min(lastItemIndex, data.length)} of {data.length} enteries;
+                    </div>
+                </div>
+                <div className="flex space-x-2">
+                    <Button 
+                        varaint="primary" 
+                        size="sm" 
+                        value="Previous" 
+                        onClick={() => paginate(currentPage - 1)} 
+                        disabled={currentPage === 1} 
+                    />
+                    <Button 
+                        varaint="primary" 
+                        size="sm" 
+                        value="Next" 
+                        onClick={() => paginate(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                    />
+                </div>
+            </div>
             </div>
         </section>
     )

@@ -7,7 +7,7 @@ interface ButttonProps{
     loading?:boolean;
     disabled?:boolean;
     value:string;
-    className:string;
+    className?:string;
     onClick?: () => void
 }
 
