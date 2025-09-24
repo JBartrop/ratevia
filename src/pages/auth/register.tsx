@@ -176,6 +176,7 @@ const Register: React.FC = () => {
                 </div>
             </div>
             <Button
+                type="submit"
                 varaint="primary"
                 size="sm"
                 disabled={!formComplete || submitting}

@@ -89,6 +89,7 @@ const ForgottenPassword: React.FC = () => {
                 })()}
             />
             <Button
+                type="submit"
                 varaint="primary"
                 size="sm"
                 disabled={!formComplete || submitting}

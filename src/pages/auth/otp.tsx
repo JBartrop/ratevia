@@ -110,6 +110,7 @@ const Otp: React.FC = () => {
             <p className="text-center mb-4">your 6 digit code has been sent to your email <span>{userEmail}</span></p>
             <OtpInput length={6} onChange={handleOtpChange} />
             <Button
+                type="submit"
                 varaint="primary"
                 size="sm"
                 disabled={!isFormComplete ||  submitting}

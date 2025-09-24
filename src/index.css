@@ -25,9 +25,9 @@ code {
   --sidebar: 230 230 230;          /* slightly darker than background */
   --input: 220 220 220;            /* soft gray */
   --lines: 170 170 170;            /* visible divider */
-  --primary: 139 223 225;  /* #8bdfe1 */
-  --secondary: 108 207 218;
-  --buttonText:  28 28 28; 
+  --primary: 59 130 246;   /* #3b82f6 */
+  --secondary: 37 99 235;
+  --buttonText:  240 240 240; 
 }
 
 .dark {
@@ -39,7 +39,7 @@ code {
   --sidebar: 34 34 34;             /* softer sidebar separation */
   --input: 50 50 50;               /* medium-dark gray */
   --lines: 95 95 95;               /* visible divider */
-  --primary: 139 223 225;  /* #8bdfe1 */
-  --secondary: 108 207 218; 
+  --primary: 59 130 246;   /* #3b82f6 */
+  --secondary: 37 99 235;
   --buttonText:  240 240 240;     /* emerald-400 */
 }

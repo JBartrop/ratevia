@@ -4,6 +4,7 @@ import React from "react";
 interface ButttonProps{
     varaint:"primary" | "secondary" | "ghost";
     size:"sm" | "md" | "lg";
+    type:  "submit" | "reset" | "button";
     loading?:boolean;
     disabled?:boolean;
     value:string;
@@ -11,10 +12,10 @@ interface ButttonProps{
     onClick?: () => void
 }
 
-const Button: React.FC <ButttonProps> = ({varaint, size, loading, value, disabled, className, onClick}) => {
+const Button: React.FC <ButttonProps> = ({varaint, type, size, loading, value, disabled, className, onClick}) => {
 
     const variantClasses: Record<"primary" | "secondary" | "ghost", string> = {
-        primary: " bg-[rgb(var(--primary))]  text-[rgb(var(--buttonText)]",
+        primary: " bg-[rgb(var(--primary))]  text-[rgb(var(--buttonText))]",
         secondary: " bg-[rgb(var(--secondary))] text-[rgb(var(--buttonText))]",
         ghost: "bg-[rgb(var(--muted))] text-[rgb(var(--buttonText))]",
     };
@@ -31,6 +32,7 @@ const Button: React.FC <ButttonProps> = ({varaint, size, loading, value, disable
     return(
         <div>
             <button
+            type={type}
             disabled={isDisabled}
             onClick={onClick}
             className={`flex justify-center items-center ${className} ${variantClasses[varaint]} ${sizeClasses[size]} ${isDisabled && 'opacity-75 cursor-not-allowed'}`}

@@ -135,6 +135,7 @@ const ResetPassword: React.FC = () => {
                 <p className=" text-green-500 my-2">Passwords match.</p>
             )}
             <Button
+                type="submit"
                 varaint="primary"
                 size="sm"
                 disabled={!formComplete || submitting}

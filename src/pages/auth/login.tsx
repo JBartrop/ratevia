@@ -108,8 +108,8 @@ const Login: React.FC = () => {
     validateUser("password", logindata.password) === "" ;
 
     return(
-        <section className="text-[rgb(var(--text))] bg-[rgb(var(--card))] rounded-lg p-4  w-[450px] my-10  overflow-hidden">
-            <h1 className="uppercase text-2xl  mb-4 font-semibold text-center">Login</h1>
+        <section className="text-[rgb(var(--text))] bg-[rgb(var(--card))] rounded-lg p-4  w-[350px] sm:w-[450px] my-10  overflow-hidden">
+            <h1 className="text-2xl  mb-4 font-semibold text-center">Login</h1>
             <Input
                 label="Email"
                 name="email"
@@ -153,11 +153,12 @@ const Login: React.FC = () => {
                         onChange={handleChange}
                         className="accent-blue-600 h-4 w-4 mr-1"
                     />
-                    <p className="text-sm sm:text-base">Remember Me</p>
+                    <p className="text-sm ">Remember Me</p>
                 </div>
-                <div><a href="/auth/forgotten-password" className="text-sm sm:text-base hover:text-[rgb(var(--primary))] text-[rgb(var(--secondary))]">forgotten password?</a></div>
+                <div><a href="/auth/forgotten-password" className="text-sm  hover:text-[rgb(var(--primary))] text-[rgb(var(--secondary))]">Forgotten password?</a></div>
             </div>
             <Button
+                type="submit"
                 varaint="primary"
                 size="sm"
                 disabled={!formComplete || submitting}

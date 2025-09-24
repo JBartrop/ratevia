@@ -46,6 +46,7 @@ const Ratevia: React.FC = () => {
                 </div>
                 <div className="flex flex-col gap-4">
                     <Button
+                        type="button"
                         varaint="primary"
                         size="sm"
                         value="Create account"
@@ -56,6 +57,7 @@ const Ratevia: React.FC = () => {
                 <p>Already have an account?</p>
                 <div className="flex flex-col gap-4">
                     <Button
+                        type="button"
                         varaint="primary"
                         size="sm"
                         value="Log in"

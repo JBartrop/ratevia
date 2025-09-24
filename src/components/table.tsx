@@ -128,6 +128,7 @@ const Table: React.FC<TableProps> = ({loading, header, data, className, actions}
                 </div>
                 <div className="flex space-x-2">
                     <Button 
+                        type="button"
                         varaint="primary" 
                         size="sm" 
                         value="Previous" 
@@ -135,6 +136,7 @@ const Table: React.FC<TableProps> = ({loading, header, data, className, actions}
                         disabled={currentPage === 1} 
                     />
                     <Button 
+                        type="button"
                         varaint="primary" 
                         size="sm" 
                         value="Next" 
