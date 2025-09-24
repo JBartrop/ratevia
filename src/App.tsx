@@ -1,7 +1,7 @@
 import React from 'react';
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 //layout imports
 import MainLayout from './layout/main';
 import AuthLayout from './layout/auth';

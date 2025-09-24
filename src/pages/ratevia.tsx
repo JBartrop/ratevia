@@ -50,7 +50,7 @@ const Ratevia: React.FC = () => {
                         varaint="primary"
                         size="sm"
                         value="Create account"
-                        className="w-full bg-transparent border border-gray-300 my-4 hover:bg-[rgb(var(--card))]"
+                        className="w-full border border-gray-300 my-4 hover:bg-[rgb(var(--primary))]/70"
                         onClick={register}
                     />
                 </div>
@@ -61,7 +61,7 @@ const Ratevia: React.FC = () => {
                         varaint="primary"
                         size="sm"
                         value="Log in"
-                        className="w-full bg-transparent border border-gray-300 my-4 hover:bg-[rgb(var(--card))]"
+                        className="w-full border border-gray-300 my-4 hover:bg-[rgb(var(--primary))]/70"
                         onClick={login}
                     />
                 </div>

@@ -132,8 +132,8 @@ const Sidebar: React.FC <SidebarProps> = ({isOpen,toggleOpen}) => {
                                 {MenuItems.map((item, index) => {
                                     const isActive = pathname === item.link;
                                     return(
-                                        <li key={index} className="relative group">
-                                            <Link to={item.link} className={` flex items-center p-1 my-2 hover:text-[rgb(var(--lines))] ${isActive ? "bg-[rgb(var(--primary))] rounded-md" : "bg-transparent"}`}>
+                                        <li key={index} className="relative group border-b border-b-blue-300">
+                                            <Link to={item.link} className={` flex items-center p-1 my-2 hover:text-[rgb(var(--lines))] ${isActive ? "bg-[rgb(var(--primary))] text-white rounded-md" : "bg-transparent"}`}>
                                             <span className="mr-2">{item.icon}</span>
                                             </Link>
 

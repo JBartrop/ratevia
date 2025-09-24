@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Table from "../../components/table";
 import Input from "../../components/input";
 import { FaSearch } from "react-icons/fa";
+import Button from "../../components/button";
+import { toast } from "react-toastify";
 
 
 
@@ -52,18 +54,7 @@ const Headers = [
   ]
     
 
-  useEffect(() => {
-    if (searchTerm.trim() === "") {
-    setUsers(listuser); 
-    } else {
-    const filtered =  Users.filter(user => 
-        user.email.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
-        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.role.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    setUsers(filtered)
-    }
-  },[searchTerm, Users])
+
 
 
     const editrow = (values: TaskRow) => {
@@ -72,31 +63,17 @@ const Headers = [
 
     const deleterow = (values: TaskRow) => {
          setUsers((prev) => prev.filter((item) => item.id !== values.id));
+         toast.success(`${values.name} deleted successfully!`);
     };
 
     return(
         <section className="w-full bg-[rgb(var(--card))] p-4 rounded-md">
             <div className="mb-4 flex justify-between items-center">
                 <div>
-                    <h1 className="text-xl font-bold text-[rgb(var(--text))]" >All Task Management</h1>
+                    <h1 className="text-2xl font-bold text-[rgb(var(--text))]" >All Task Management</h1>
                 </div>
                 <div className="flex">
-                    <div className="relative w-80">
-                    <Input
-                        type="text"
-                        name=""
-                        size="sm"
-                        placeholder="Search user..."
-                        value={searchTerm}
-                        icon={true}
-                        onChange={(event:React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value)}
-                        className="pl-10"
-                        showicon={(() => {
-                            const Icon = FaSearch as React.ComponentType<{ size?: number }>;
-                            return <Icon size={20} />;
-                        })()}
-                    />
-                    </div>
+                    {/* anythig  */}
                 </div>
             </div>
             
@@ -110,12 +87,31 @@ const Headers = [
             />
 
             {editingRow && (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
-            <h2 className="text-lg font-bold mb-4">Edit User</h2>
-            <p>{editingRow.name}</p>
-            <p className="cursor-pointer" onClick={() => setEditingRow(null)}>close</p>
-            </div>
+            <div onClick={() => setEditingRow(null)} className="fixed inset-0  bg-black/50 flex justify-center items-center z-50">
+                <div onClick={(e) => e.stopPropagation()} className="bg-[rgb(var(--card))] p-6 rounded-lg w-5/6 sm:w-4/6 lg:w-1/2 shadow-lg">
+                    <h2 className="text-lg font-bold mb-4">Edit User</h2>
+                    <p>{editingRow.name}</p>
+                    <p className="cursor-pointer" onClick={() => setEditingRow(null)}>close</p>
+                    <div className="mt-6 flex justify-end gap-2">
+                        <Button 
+                            type="button"
+                            varaint="primary" 
+                            size="sm" 
+                            value="Save" 
+                            onClick={() => console.log(editingRow)}
+                            className="px-3"
+                        />
+                        <Button 
+                            type="button"
+                            varaint="primary" 
+                            size="sm" 
+                            value="Close" 
+                            onClick={() => setEditingRow(null)}
+                            className= "bg-red-600 text-white hover:bg-red-600/80 px-3"
+                        />
+
+                    </div>
+                </div>
             </div>
             )}
         </section>

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./button";
+import Input from "./input";
+import { FaSearch } from "react-icons/fa";
 
 
 
@@ -29,6 +31,8 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
 
     const [itemsPerPage, setItemsPerPage] = useState<number>(10);
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [searchTerm, setSearchTerm] = useState<string>("");
+    const [filteredData, setFilteredData] = useState<T[]>(data)
 
     const tableoptions = [
         {name:"10" },
@@ -40,10 +44,25 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
-    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
     const lastItemIndex = currentPage * itemsPerPage; 
     const startItemIndex =  lastItemIndex - itemsPerPage;
-    const currentItems = data.slice(startItemIndex, lastItemIndex)
+    const currentItems = filteredData.slice(startItemIndex, lastItemIndex)
+
+    useEffect(() => {
+        let filtered = [...data];
+
+
+        if (searchTerm.trim()) {
+            filtered = data.filter((row) =>
+                Object.values(row).some((val) =>
+                    String(val).toLowerCase().includes(searchTerm.toLowerCase())
+            )
+            );
+        }
+        setFilteredData(filtered)
+        setCurrentPage(1)
+    },[searchTerm, data]);
 
 
     if (loading) {
@@ -52,20 +71,40 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
     return(
         <section className={`w-full  ${className ?? ""}`}>
             <div className="overflow-x-auto">
-            <div className="flex items-center gap-2 px-2 py-4">
-                <span>Show</span>
-                <select
-                value={itemsPerPage}
-                onChange={(e) => {setItemsPerPage(Number(e.target.value)); setCurrentPage(1);}}
-                 className=" outline-none px-3 py-1 border border-gray-300 rounded-md text-sm bg-white shadow-sm"
-                >
-                    {tableoptions.map((opt) => (
-                        <option 
-                        value={opt.name} 
-                        key={opt.name} 
-                        className="bg-white outline-none border-none text-gray-700 hover:bg-green-100">{opt.name}</option>
-                    ))}
-                </select>
+            <div className="flex items-center justify-between gap-2  py-4">
+                <div>
+                    <span>Show</span>
+                    <select
+                    value={itemsPerPage}
+                    onChange={(e) => {setItemsPerPage(Number(e.target.value)); setCurrentPage(1);}}
+                     className=" outline-none px-3 py-1 border border-gray-300 rounded-md text-sm bg-white shadow-sm"
+                    >
+                        {tableoptions.map((opt) => (
+                            <option 
+                            value={opt.name} 
+                            key={opt.name} 
+                            className="bg-white outline-none border-none text-gray-700 hover:bg-green-100">{opt.name}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="flex">
+                    <div className="relative w-80">
+                    <Input
+                        type="text"
+                        name=""
+                        size="sm"
+                        placeholder="Search user..."
+                        value={searchTerm}
+                        icon={true}
+                        onChange={(event:React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value)}
+                        className="border border-gray-300"
+                        showicon={(() => {
+                            const Icon = FaSearch as React.ComponentType<{ size?: number }>;
+                            return <Icon size={20} />;
+                        })()}
+                    />
+                    </div>
+                </div>
             </div>
             <table className="min-w-full overflow-x-auto border border-gray-200 rounded-md">
                 <thead>
