@@ -1,41 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "../../components/table";
 
 
-export interface TaskRow {}
+
+export interface TaskRow {
+  id: string;
+  name: string;
+  role: string;
+  email: string;
+  phone: string;
+}
 
 
 const Task : React.FC = () => {
-    
 
+    const [editingRow, setEditingRow] = useState<TaskRow | null>(null);
 
-    const editrow = (values: TaskRow) => {
-        console.log("edit that", values)
-    };
-
-    const deleterow = (values: TaskRow) => {
-        console.log("delete that", values)
-    };
-
-    return(
-        <section className="w-full bg-[rgb(var(--card))] p-4 rounded-md">
-            <div className="mb-4 flex justify-between items-center">
-                <div>
-                    <h1 className="text-xl font-bold text-[rgb(var(--text))]" >All Task Management</h1>
-                </div>
-                <div className="flex">
-                    <p>filter</p>
-                    <p>search</p>
-                </div>
-            </div>
-            
-            <Table   header={[
-    { id: "name", header: "Name" },
-    { id: "role", header: "Role" },
-    { id: "email", header: "Email" },
-    { id: "phone", header: "Phone" },
-  ]}
-  data={[
+    const [Users, setUsers] = useState ([
   { id: "1", name: "John Doe", role: "Admin", email: "john@example.com", phone: "555-123-4567" },
   { id: "2", name: "Jane Smith", role: "User", email: "jane@example.com", phone: "555-987-6543" },
   { id: "3", name: "Michael Johnson", role: "Manager", email: "michael@example.com", phone: "555-111-2222" },
@@ -56,12 +37,55 @@ const Task : React.FC = () => {
   { id: "18", name: "Mia Young", role: "Support", email: "mia@example.com", phone: "555-222-8888" },
   { id: "19", name: "Daniel Hall", role: "Manager", email: "daniel@example.com", phone: "555-555-0000" },
   { id: "20", name: "Harper Allen", role: "User", email: "harper@example.com", phone: "555-123-9999" }
-]}
+])
 
-    actions={[
-    { label: "Edit", onClick: (row) => editrow(row), className: "bg-[rgb(var(--primary))] text-white" },
-    { label: "Delete", onClick: (row) =>  deleterow(row), className: "bg-red-600 text-white" },
-  ]} />
+const Headers = [
+    { id: "name", header: "Name" },
+    { id: "role", header: "Role" },
+    { id: "email", header: "Email" },
+    { id: "phone", header: "Phone" },
+  ]
+    
+
+
+    const editrow = (values: TaskRow) => {
+        setEditingRow(values)
+    };
+
+    const deleterow = (values: TaskRow) => {
+         setUsers((prev) => prev.filter((item) => item.id !== values.id));
+    };
+
+    return(
+        <section className="w-full bg-[rgb(var(--card))] p-4 rounded-md">
+            <div className="mb-4 flex justify-between items-center">
+                <div>
+                    <h1 className="text-xl font-bold text-[rgb(var(--text))]" >All Task Management</h1>
+                </div>
+                <div className="flex">
+                    <p>filter</p>
+                    <p>search</p>
+                </div>
+            </div>
+            
+            <Table   
+                header={Headers } 
+                data={Users}
+                actions={[
+                    { label: "Edit", onClick: (row) => editrow(row), className: "bg-[rgb(var(--primary))] text-white" },
+                    { label: "Delete", onClick: (row) =>  deleterow(row), className: "bg-red-600 text-white" },
+                ]}
+            />
+
+            {editingRow && (
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
+            <h2 className="text-lg font-bold mb-4">Edit User</h2>
+            <p>{editingRow.name}</p>
+            <p className="cursor-pointer" onClick={() => setEditingRow(null)}>close</p>
+            </div>
+            </div>
+            )}
         </section>
     )
 }

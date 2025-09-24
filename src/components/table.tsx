@@ -8,28 +8,24 @@ interface TableHeaderProps{
     header:string;
 }
 
-interface TableRowData {
-    id: string | number;
-    [key: string]: React.ReactNode; 
-}
 
-interface TableAction {
+interface TableAction<T> {
   label: string;
-  onClick: (row: TableRowData, action: string) => void;
+  onClick: (row: T, action: string) => void;
   className?: string;
 }
 
 
-interface TableProps {
+interface TableProps<T> {
     header: TableHeaderProps[];
-    data:TableRowData[];
+    data:T[];
     loading?: boolean; 
     className?: string;
-    actions?: TableAction[];
+    actions?: TableAction<T>[];
 }
 
 
-const Table: React.FC<TableProps> = ({loading, header, data, className, actions}) => {
+const Table = <T extends { id: string | number }>({loading, header, data, className, actions}:TableProps<T>) => {
 
     const [itemsPerPage, setItemsPerPage] = useState<number>(10);
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -91,7 +87,7 @@ const Table: React.FC<TableProps> = ({loading, header, data, className, actions}
                             <tr key={row.id} className="hover:bg-gray-100">
                                 {header.map((col) => (
                                     <td key={col.id}  className="px-4 py-2 border-t text-sm text-[rgb(var(--text))]">
-                                        {row[col.id] ?? "-"}
+                                        {(row as any)[col.id] ?? "-"}
                                     </td>
                                 ))}
                                 {actions && actions.length > 0 && (
@@ -120,31 +116,34 @@ const Table: React.FC<TableProps> = ({loading, header, data, className, actions}
                 </tbody>
             </table>
             <p className="pt-4 text-center text-sm text-[rgb(var(--text))]/50">A list of all data</p>
-            <div className="flex justify-between items-center my-6">
-                <div>
+            {data.length > itemsPerPage && (
+                <div className="flex justify-between items-center my-6">
                     <div>
-                        showing {startItemIndex + 1} to {Math.min(lastItemIndex, data.length)} of {data.length} enteries;
+                        <div>
+                            showing {startItemIndex + 1} to {Math.min(lastItemIndex, data.length)} of {data.length} enteries;
+                        </div>
+                    </div>
+                    <div className="flex space-x-2">
+                        <Button 
+                            type="button"
+                            varaint="primary" 
+                            size="sm" 
+                            value="Previous" 
+                            onClick={() => paginate(currentPage - 1)} 
+                            disabled={currentPage === 1} 
+                        />
+                        <Button 
+                            type="button"
+                            varaint="primary" 
+                            size="sm" 
+                            value="Next" 
+                            onClick={() => paginate(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                        />
                     </div>
                 </div>
-                <div className="flex space-x-2">
-                    <Button 
-                        type="button"
-                        varaint="primary" 
-                        size="sm" 
-                        value="Previous" 
-                        onClick={() => paginate(currentPage - 1)} 
-                        disabled={currentPage === 1} 
-                    />
-                    <Button 
-                        type="button"
-                        varaint="primary" 
-                        size="sm" 
-                        value="Next" 
-                        onClick={() => paginate(currentPage + 1)}
-                        disabled={currentPage === totalPages}
-                    />
-                </div>
-            </div>
+            )}
+            
             </div>
         </section>
     )
