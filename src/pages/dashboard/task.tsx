@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "../../components/table";
+import Input from "../../components/input";
+import { FaSearch } from "react-icons/fa";
 
 
 
@@ -11,12 +13,7 @@ export interface TaskRow {
   phone: string;
 }
 
-
-const Task : React.FC = () => {
-
-    const [editingRow, setEditingRow] = useState<TaskRow | null>(null);
-
-    const [Users, setUsers] = useState ([
+const listuser = [
   { id: "1", name: "John Doe", role: "Admin", email: "john@example.com", phone: "555-123-4567" },
   { id: "2", name: "Jane Smith", role: "User", email: "jane@example.com", phone: "555-987-6543" },
   { id: "3", name: "Michael Johnson", role: "Manager", email: "michael@example.com", phone: "555-111-2222" },
@@ -37,7 +34,15 @@ const Task : React.FC = () => {
   { id: "18", name: "Mia Young", role: "Support", email: "mia@example.com", phone: "555-222-8888" },
   { id: "19", name: "Daniel Hall", role: "Manager", email: "daniel@example.com", phone: "555-555-0000" },
   { id: "20", name: "Harper Allen", role: "User", email: "harper@example.com", phone: "555-123-9999" }
-])
+]
+
+
+const Task : React.FC = () => {
+
+    const [editingRow, setEditingRow] = useState<TaskRow | null>(null);
+    const [searchTerm, setSearchTerm] = useState<string>("");
+
+    const [Users, setUsers] = useState <TaskRow[]>(listuser)
 
 const Headers = [
     { id: "name", header: "Name" },
@@ -46,6 +51,19 @@ const Headers = [
     { id: "phone", header: "Phone" },
   ]
     
+
+  useEffect(() => {
+    if (searchTerm.trim() === "") {
+    setUsers(listuser); 
+    } else {
+    const filtered =  Users.filter(user => 
+        user.email.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.role.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    setUsers(filtered)
+    }
+  },[searchTerm, Users])
 
 
     const editrow = (values: TaskRow) => {
@@ -63,8 +81,22 @@ const Headers = [
                     <h1 className="text-xl font-bold text-[rgb(var(--text))]" >All Task Management</h1>
                 </div>
                 <div className="flex">
-                    <p>filter</p>
-                    <p>search</p>
+                    <div className="relative w-80">
+                    <Input
+                        type="text"
+                        name=""
+                        size="sm"
+                        placeholder="Search user..."
+                        value={searchTerm}
+                        icon={true}
+                        onChange={(event:React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value)}
+                        className="pl-10"
+                        showicon={(() => {
+                            const Icon = FaSearch as React.ComponentType<{ size?: number }>;
+                            return <Icon size={20} />;
+                        })()}
+                    />
+                    </div>
                 </div>
             </div>
             
