@@ -43,3 +43,13 @@ code {
   --secondary: 37 99 235;
   --buttonText:  240 240 240;     /* emerald-400 */
 }
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
