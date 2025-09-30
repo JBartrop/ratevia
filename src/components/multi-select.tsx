@@ -57,7 +57,7 @@ const MultiSelect:React.FC<DropdownSelectProps> = ({label, options, value, onCha
                 </div>
 
                 {open && !disabled && (
-                     <div className="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10 animate-fadeIn">
+                     <div className="absolute left-0 mt-4 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10 animate-fadeIn">
                         {options.map((opt) => (
                             <div key={opt.value} onClick={() => { onChange(opt.value); setOpen(false);}} className={`px-4 py-2 transition-colors ${value === opt.value ? "text-[rgb(var(--primary))] bg-[rgb(var(--primary))]/50 font-medium" : "hover:bg-gray-100 text-gray-700"} `}>
                                 {opt.label}
