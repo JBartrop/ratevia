@@ -24,7 +24,7 @@ const Modal:React.FC<ModalProps> = ({title, isOpen, description, children, onClo
 
     return (
             <div onClick={onClose} className="fixed inset-0 duration-300 bg-[rgb(var(--muted))]/50 backdrop-opacity-50 flex justify-center items-center z-50">
-                <div onClick={(e) => e.stopPropagation()} className="bg-[rgb(var(--card))] relative inset-0 rounded-lg p-6 sm:w-1/2 w-5/6 max-h-5/6 animate-fadeIn overflow-y-auto">
+                <div onClick={(e) => e.stopPropagation()} className="bg-[rgb(var(--card))] relative inset-0 rounded-lg p-6 sm:w-1/2 w-5/6 max-h-96 animate-fadeIn ">
                     <button
                       onClick={onClose}
                       className="absolute top-3 right-3 text-red-500 hover:text-red-700 hover:bg-red-50 px-2 py-1 rounded-lg"
@@ -35,7 +35,7 @@ const Modal:React.FC<ModalProps> = ({title, isOpen, description, children, onClo
                         {title && <h1 className="text-lg font-semibold">{title}</h1>}
                         {description && <h1 className="text-sm font-semibold text-[rgb(var(--muted))]">{description}</h1>}
                     </div>
-                    <div>
+                    <div className="max-h-64 overflow-y-auto">
                         {children}
                     </div>
                     
