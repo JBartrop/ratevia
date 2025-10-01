@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../../components/card";
+import Modal from "../../components/modal";
 
 
 const Notifications : React.FC = () => {
+    const [modalcalled , setmodalcalled] = useState<boolean>(false);
+
+    // const callmodal = () => {
+    //     setmodalcalled(true)
+    // }
     return(
         <section>
             <h1>notification</h1>
@@ -10,11 +16,12 @@ const Notifications : React.FC = () => {
                 title="User Management"
                 description="Manage all system users with roles, emails, and contact details."
                 actions={
-                <button className="px-3 py-1 rounded-md bg-[rgb(var(--primary))] text-[rgb(var(--buttonText))]">
+                <button onClick={() => setmodalcalled(prev => !prev) } className="px-3 py-1 rounded-md bg-[rgb(var(--primary))] text-[rgb(var(--buttonText))]">
                   + Add User
                 </button>
                 }
             ></Card>
+            {modalcalled && <Modal isOpen={modalcalled} onClose={() => setmodalcalled(false)} title="User Form" description="hello there">hello world</Modal>}
         </section>
     )
 }
