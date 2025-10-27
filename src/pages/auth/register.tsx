@@ -111,7 +111,7 @@ const Register: React.FC = () => {
 
 
     return(
-        <section className="text-[rgb(var(--text))] bg-[rgb(var(--card))] rounded-lg p-4  w-[450px] my-10  overflow-hidden">
+        <section className="text-[rgb(var(--text))] bg-[rgb(var(--card))] rounded-lg p-4  w-[350px] sm:w-[450px] my-10  overflow-hidden">
             <h1 className="uppercase text-2xl  mb-4 font-semibold text-center">Create your account</h1>
             <Input
                 label="Full name"
@@ -120,6 +120,7 @@ const Register: React.FC = () => {
                 placeholder="enter your full name"
                 value={registerdata.name}
                 size="sm"
+                className="py-3"
                 onChange={handleChange}
                 icon={true}
                 onerror={true}
@@ -136,6 +137,7 @@ const Register: React.FC = () => {
                 placeholder="enter your mail"
                 value={registerdata.email}
                 size="sm"
+                className="py-3"
                 onChange={handleChange}
                 icon={true}
                 onerror={true}
@@ -154,6 +156,7 @@ const Register: React.FC = () => {
                 size="sm"
                 onChange={handleChange}
                 icon={true}
+                className="py-3"
                 password={true}
                 onerror={true}
                 errorMessage={iserror.password}

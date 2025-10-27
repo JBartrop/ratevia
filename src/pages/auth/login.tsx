@@ -115,6 +115,7 @@ const Login: React.FC = () => {
                 name="email"
                 type="email"
                 placeholder="enter your mail"
+                className="py-3"
                 value={logindata.email}
                 size="sm"
                 onChange={handleChange}
@@ -131,6 +132,7 @@ const Login: React.FC = () => {
                 name="password"
                 type="password"
                 placeholder="enter your password"
+                className="py-3"
                 value={logindata.password}
                 size="sm"
                 onChange={handleChange}

@@ -4,6 +4,7 @@ import Input from "../../components/input";
 import { FaSearch } from "react-icons/fa";
 import Button from "../../components/button";
 import { toast } from "react-toastify";
+import { BiEdit, BiTrash } from "react-icons/bi";
 
 
 
@@ -81,8 +82,14 @@ const Headers = [
                 header={Headers } 
                 data={Users}
                 actions={[
-                    { label: "Edit", onClick: (row) => editrow(row), className: "bg-[rgb(var(--primary))] text-white" },
-                    { label: "Delete", onClick: (row) =>  deleterow(row), className: "bg-red-600 text-white" },
+                    { label: "Edit", icon:(() => {
+                                                const Icon = BiEdit as React.ComponentType<{ size?: number }>;
+                                                return <Icon size={15} />;
+                                            })(), onClick: (row) => editrow(row), className: "bg-transparent border border-[rgb(var(--primary))] text-[rgb(var(--primary))] hover:bg-[rgb(var(--primary))]/20" },
+                    { label: "Delete",icon:(() => {
+                                                const Icon = BiTrash as React.ComponentType<{ size?: number }>;
+                                                return <Icon size={15} />;
+                                            })(), onClick: (row) =>  deleterow(row), className: "bg-transparent border border-red-600 text-red-600 hover:bg-red-100/50" },
                 ]}
             />
 

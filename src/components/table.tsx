@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import Button from "./button";
 import Input from "./input";
 import { FaSearch } from "react-icons/fa";
@@ -15,6 +15,7 @@ interface TableAction<T> {
   label: string;
   onClick: (row: T, action: string) => void;
   className?: string;
+  icon?: ReactNode;
 }
 
 
@@ -97,10 +98,10 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
                         value={searchTerm}
                         icon={true}
                         onChange={(event:React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value)}
-                        className="border border-gray-300"
+                        className="border py-2 border-gray-300"
                         showicon={(() => {
                             const Icon = FaSearch as React.ComponentType<{ size?: number }>;
-                            return <Icon size={20} />;
+                            return <Icon size={15} />;
                         })()}
                     />
                     </div>
@@ -135,9 +136,14 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
                                           <button
                                             key={i}
                                             onClick={() => action.onClick(row, action.label)}
-                                            className={`px-2 py-1 rounded-md text-xs font-medium border hover:opacity-80 transition ${action.className ?? "bg-blue-600 text-white"}`}
+                                            className={`px-1 py-1 rounded-md text-xs font-medium border hover:opacity-80 transition ${action.className ?? "bg-blue-600 text-white"}`}
                                           >
-                                            {action.label}
+                                            {action.icon && (
+                                                <span className="flex-shrink-0">
+                                                    {action.icon}
+                                                </span>
+                                            )}
+                                            {/* {action.label} */}
                                           </button>
                                         ))}
                                     </td>
@@ -155,12 +161,16 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
                 </tbody>
             </table>
             <p className="pt-4 text-center text-sm text-[rgb(var(--text))]/50">A list of all data</p>
-            {data.length > itemsPerPage && (
+            {(data.length > itemsPerPage || filteredData.length !== data.length)  && (
                 <div className="flex justify-between items-center my-6">
                     <div>
-                        <div>
+                        {searchTerm ? (<div>
+                            showing {startItemIndex + 1} to {Math.min(lastItemIndex, filteredData.length)} of {filteredData.length} enteries <span className="text-gray-400 ml-1">from {data.length} total entries </span>;
+                        </div>) : (
+                            <div>
                             showing {startItemIndex + 1} to {Math.min(lastItemIndex, data.length)} of {data.length} enteries;
                         </div>
+                        )}
                     </div>
                     <div className="flex space-x-2">
                         <Button 
@@ -171,6 +181,9 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
                             onClick={() => paginate(currentPage - 1)} 
                             disabled={currentPage === 1} 
                         />
+                        <div className="text-sm font-medium text-gray-500 p-1 rounded-md mx-1">
+                            Page {currentPage} of {totalPages}
+                        </div>
                         <Button 
                             type="button"
                             varaint="primary" 

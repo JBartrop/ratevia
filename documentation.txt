@@ -22,3 +22,5 @@ Documentation of all components created
 #TABS
 
 #TOASTER
+
+#SWIPER CAROUSEL
