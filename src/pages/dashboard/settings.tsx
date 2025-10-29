@@ -1,6 +1,6 @@
 import React from "react";
-import FormSteps from "../../components/stepsPage";
-import SwiperCarousel from "../../components/swiper";
+import FormSteps from "../../components/ui/stepsPage";
+import SwiperCarousel from "../../components/ui/swiper";
 
 
 const Settings : React.FC = () => {

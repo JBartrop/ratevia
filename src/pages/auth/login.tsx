@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Input from "../../components/input";
+import Input from "../../components/ui/input";
 import { FaRegUser } from "react-icons/fa";
 import { MdMailOutline } from "react-icons/md";
 import { IoKeyOutline } from "react-icons/io5";
-import Button from "../../components/button";
+import Button from "../../components/ui/button";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import OtpInput from "../../components/otp-input";
-import Button from "../../components/button";
+import OtpInput from "../../components/ui/otp-input";
+import Button from "../../components/ui/button";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 

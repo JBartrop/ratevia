@@ -1,7 +1,7 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../components/button";
+import Button from "../components/ui/button";
 
 
 

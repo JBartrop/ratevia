@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Card from "../../components/card";
-import Modal from "../../components/modal";
-import Accordion from "../../components/accordion";
+import Card from "../../components/ui/card";
+import Modal from "../../components/ui/modal";
+import Accordion from "../../components/ui/accordion";
 
 
 const Notifications : React.FC = () => {

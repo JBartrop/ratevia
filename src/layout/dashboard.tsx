@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import Loader from '../components/loader';
 import Sidebar from '../components/sidebar';
 import ProtectedRoute from '../components/protectedRoute';
+import ScrollToTop from '../components/scrollToTop';
 
 
 
@@ -30,6 +31,7 @@ const DashboardLayout: React.FC = () => {
     return(
         <ProtectedRoute>
         <section>
+            <ScrollToTop />
             <main className='flex min-h-screen w-full overflow-x-hidden'>
                 <Sidebar isOpen={collapsed} toggleOpen={() => setCollapsed(prev => !prev)} />
                 <div className={`${collapsed ? "ml-[3.75rem]" : "ml-64"} transition-all duration-300 p-4 w-full min-h-screen`}>

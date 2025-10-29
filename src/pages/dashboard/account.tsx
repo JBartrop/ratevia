@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import MultiSelect from "../../components/multi-select";
-import Input from "../../components/input";
-import Tabs from "../../components/tabs";
+import MultiSelect from "../../components/ui/multi-select";
+import Input from "../../components/ui/input";
+import Tabs from "../../components/ui/tabs";
 
 
 const Account : React.FC = () => {
