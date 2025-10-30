@@ -85,11 +85,11 @@ const Headers = [
                     { label: "Edit", icon:(() => {
                                                 const Icon = BiEdit as React.ComponentType<{ size?: number }>;
                                                 return <Icon size={15} />;
-                                            })(), onClick: (row) => editrow(row), className: "bg-transparent border border-[rgb(var(--primary))] text-[rgb(var(--primary))] hover:bg-[rgb(var(--primary))]/20" },
+                                            })(), onClick: (row) => editrow(row), className: "px-1 py-1 rounded-md border border-[rgb(var(--muted))]/30 hover:bg-[rgb(var(--primary))]/10 text-[rgb(var(--primary))]" },
                     { label: "Delete",icon:(() => {
                                                 const Icon = BiTrash as React.ComponentType<{ size?: number }>;
                                                 return <Icon size={15} />;
-                                            })(), onClick: (row) =>  deleterow(row), className: "bg-transparent border border-red-600 text-red-600 hover:bg-red-100/50" },
+                                            })(), onClick: (row) =>  deleterow(row), className: "px-1 py-1 bg-transparent border border-[rgb(var(--muted))]/30 text-red-600 hover:bg-red-100/50" },
                 ]}
             />
 
