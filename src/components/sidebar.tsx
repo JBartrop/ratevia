@@ -21,6 +21,7 @@ interface MenuProps {
     name: string;
     link: string;
     icon: ReactNode;
+    children?: MenuProps[];
     onClick?: () => void;
 }
 
@@ -84,6 +85,26 @@ const MenuItems: MenuProps[] = [
             const Icon = IoSettingsOutline as React.ComponentType<{ size?: number }>;
             return <Icon size={20} />;
         })(),
+        children: [
+            {
+              id: "6-1",
+              name: "Profile Settings",
+              link: "/dashboard/setting/profile",
+              icon:  (() => {
+                  const Icon = MdOutlineAccountCircle as React.ComponentType<{ size?: number }>;
+                  return <Icon size={20} />;
+              })(),
+            },
+            {
+              id: "6-2",
+              name: "System Settings",
+              link: "/dashboard/setting/system",
+              icon:  (() => {
+                  const Icon = IoSettingsOutline as React.ComponentType<{ size?: number }>;
+                  return <Icon size={20} />;
+              })(),
+            },
+        ],
     },
 ]
 
@@ -91,9 +112,15 @@ const MenuItems: MenuProps[] = [
 
 const Sidebar: React.FC <SidebarProps> = ({isOpen,toggleOpen}) => {
     const [user, setUser] = useState<userInfo| null>(null);
+    const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
+
     const location = useLocation();
     const  pathname = location.pathname;
     const router = useNavigate();
+
+    const toggleDropdown = (id: string) => {
+        setOpenDropdownId(openDropdownId === id ? null : id);
+    };
 
     const logoutAction = () => {
         new Promise<void>((res) => setTimeout(res, Math.random() * 2000))
@@ -127,10 +154,11 @@ const Sidebar: React.FC <SidebarProps> = ({isOpen,toggleOpen}) => {
                                 return <Icon size={20} />;
                             })()}
                         </div>
-                        <div>
+                        <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent pr-1">
                             <ul>
                                 {MenuItems.map((item, index) => {
                                     const isActive = pathname === item.link;
+                                    const isDropdownOpen = openDropdownId === item.id;
                                     return(
                                         <li key={index} className="relative group border-b border-b-blue-300">
                                             <Link to={item.link} className={` flex items-center p-1 my-2 hover:text-[rgb(var(--lines))] ${isActive ? "bg-[rgb(var(--primary))] text-white rounded-md" : "bg-transparent"}`}>
@@ -178,17 +206,65 @@ const Sidebar: React.FC <SidebarProps> = ({isOpen,toggleOpen}) => {
                                 })()}
                             </div>
                         </div>
-                        <div>
+                        <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent pr-1">
                             <ul>
                                 {MenuItems.map((item, index) => {
                                     const isActive = pathname === item.link;
-                                    return(
-                                        <li key={index}>
-                                            <Link to={item.link} className={` flex items-center p-1 my-2 hover:text-[rgb(var(--lines))] ${isActive ? "bg-[rgb(var(--primary))] rounded-md" : "bg-transparent"}`}>
-                                            <span className="mr-2">{item.icon}</span> {item.name}
-                                            </Link>
-                                        </li>
-                                    )
+                                    const isDropdownOpen = openDropdownId === item.id;
+                                     return (
+      <li key={item.id} className="my-2">
+        {item.children ? (
+          <>
+            {/* Dropdown Toggle */}
+            <button
+              onClick={() => toggleDropdown(item.id)}
+              className={`flex items-center justify-between w-full p-2 rounded-md hover:text-[rgb(var(--lines))] ${
+                isActive ? "bg-[rgb(var(--primary))] text-white" : ""
+              }`}
+            >
+              <span className="flex items-center">
+                <span className="mr-2">{item.icon}</span>
+                {item.name}
+              </span>
+              <span className={`transform transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}>
+                ▼
+              </span>
+            </button>
+
+            {/* Dropdown Items */}
+            {isDropdownOpen && (
+              <ul className="ml-6 mt-1 border-l border-gray-300">
+                {item.children.map((child) => (
+                  <li key={child.id}>
+                    <Link
+                      to={child.link!}
+                      className={`flex items-center p-2 my-1 hover:text-[rgb(var(--lines))] ${
+                        pathname === child.link
+                          ? "bg-[rgb(var(--primary))] text-white rounded-md"
+                          : ""
+                      }`}
+                    >
+                      <span className="mr-2">{child.icon}</span>
+                      {child.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        ) : (
+          <Link
+            to={item.link!}
+            className={`flex items-center p-2 hover:text-[rgb(var(--lines))] ${
+              isActive ? "bg-[rgb(var(--primary))] rounded-md text-white" : ""
+            }`}
+          >
+            <span className="mr-2">{item.icon}</span>
+            {item.name}
+          </Link>
+        )}
+      </li>
+    );
                                 })}
                             </ul>
                         </div>
