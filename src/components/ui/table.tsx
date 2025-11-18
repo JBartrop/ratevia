@@ -67,8 +67,14 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
 
 
     if (loading) {
-        return <p className="text-gray-500">Loading...</p>;
+        return (
+            <div className="flex flex-col justify-center items-center p-6 text-gray-500 text-center">
+                <div className="w-14 h-14 border-4 border-t-transparent border-[rgb(var(--primary))] rounded-full animate-spin my-4"></div>
+                Loading Data...
+            </div>
+        )
     }
+    // <p className="text-gray-500">Loading...</p> 
     return(
         <section className={`w-full  ${className ?? ""}`}>
             <div className="overflow-x-auto">

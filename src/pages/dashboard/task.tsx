@@ -43,16 +43,27 @@ const listuser = [
 const Task : React.FC = () => {
 
     const [editingRow, setEditingRow] = useState<TaskRow | null>(null);
+    const [loading, setloading] = useState<boolean>(false)
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     const [Users, setUsers] = useState <TaskRow[]>(listuser)
 
-const Headers = [
-    { id: "name", header: "Name" },
-    { id: "role", header: "Role" },
-    { id: "email", header: "Email" },
-    { id: "phone", header: "Phone" },
-  ]
+    const Headers = [
+        { id: "name", header: "Name" },
+        { id: "role", header: "Role" },
+        { id: "email", header: "Email" },
+        { id: "phone", header: "Phone" },
+    ]
+
+    const LoadTable = async() => {
+        setloading(true)
+        await new Promise<void>((res) => setTimeout(res, Math.random() * 2000));
+        setloading(false)
+    }
+
+    useEffect(() => {
+        LoadTable()
+    },[])
     
 
 
@@ -81,6 +92,7 @@ const Headers = [
             <Table   
                 header={Headers } 
                 data={Users}
+                loading={loading}
                 actions={[
                     { label: "Edit", icon:(() => {
                                                 const Icon = BiEdit as React.ComponentType<{ size?: number }>;
