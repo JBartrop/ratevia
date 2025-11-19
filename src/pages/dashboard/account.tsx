@@ -5,25 +5,11 @@ import Tabs from "../../components/ui/tabs";
 
 
 const Account : React.FC = () => {
-    const [selected, setSelected] = useState<string>("");
     return(
         <section>
             <h1>Account</h1>
                 <div className="p-6 max-w-sm">
-      <MultiSelect
-        label="Choose an option"
-        value={selected}
-        onChange={setSelected}
-        options={[
-          { value: "option1", label: "Option One" },
-          { value: "option2", label: "Option Two" },
-          { value: "option3", label: "Option Three" },
-        ]}
-        size="sm"
-      />
-      <p className="mt-2 text-gray-700">
-        Selected: {selected || "Nothing yet"}
-      </p>
+
     </div>
 
     <div className="max-w-lg mx-auto mt-10">

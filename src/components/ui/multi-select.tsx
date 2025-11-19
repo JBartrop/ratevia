@@ -2,32 +2,32 @@ import React, { useEffect, useRef, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
 
-interface OptionProps {
-  value: string;
-  label: string;
+interface OptionProps<T>  {
+  value: T;
+  label: string | number;
 }
 
-interface DropdownSelectProps {
+interface DropdownSelectProps<T> {
   label?: string;
-  options: OptionProps[];
-  value?: string;
-  onChange: (value: string) => void;
+  options: OptionProps<T>[];
+  value?: string | number;
+  onChange: (value: T) => void;
   size?: "sm" | "md" | "lg";
   disabled?: boolean;
   className?: string;
 }
 
 
-const MultiSelect:React.FC<DropdownSelectProps> = ({label, options, value, onChange, size = "md", disabled,className}) => {
+const MultiSelect = <T extends string | number> ({label, options, value, onChange, size = "md", disabled,className}: DropdownSelectProps<T>) => {
 
     const [open, setOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     const selectedOption = options.find((opt) => opt.value === value);
 
     const sizeClasses: Record<"sm" | "md" | "lg", string> = {
-        sm: "text-sm py-2 px-2 rounded-lg",
-        md: "text-base py-3 px-3 rounded-lg",
-        lg: "text-lg py-4 px-4 rounded-xl",
+        sm: "text-sm py-1 px-1 rounded-lg",
+        md: "text-base py-2 px-2 rounded-lg",
+        lg: "text-lg py-3 px-3 rounded-xl",
     };
 
     useEffect(() => {
@@ -57,9 +57,9 @@ const MultiSelect:React.FC<DropdownSelectProps> = ({label, options, value, onCha
                 </div>
 
                 {open && !disabled && (
-                     <div className="absolute left-0 mt-4 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10 animate-fadeIn">
+                     <div onClick={() => !disabled && setOpen((prev) => !prev)} className="absolute left-0 mt-4 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10 animate-fadeIn">
                         {options.map((opt) => (
-                            <div key={opt.value} onClick={() => { onChange(opt.value); setOpen(false);}} className={`px-4 py-2 transition-colors ${value === opt.value ? "text-[rgb(var(--primary))] bg-[rgb(var(--primary))]/50 font-medium" : "hover:bg-gray-100 text-gray-700"} `}>
+                            <div key={opt.value} onClick={(e) => { e.stopPropagation(); onChange(opt.value); setOpen(false);}} className={`px-4 py-2 transition-colors ${value === opt.value ? "text-[rgb(var(--primary))] bg-[rgb(var(--primary))]/50 font-medium" : "hover:bg-gray-100 text-gray-700"} `}>
                                 {opt.label}
                             </div>
                         ))}

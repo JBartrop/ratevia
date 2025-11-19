@@ -278,10 +278,10 @@ const Notifications : React.FC = () => {
                 }
               >
                 <div className="flex justify-between">
-                  <p>{notification.description.length > 70
+                  <p className="max-[640px]:text-[12px]">{notification.description.length > 70
                       ? notification.description.slice(0, 70) + "..."
                       : notification.description}</p>
-                  <p className="ml-1 text-sm text-[rgb(var(--muted))]">{ formatTime(notification.createdAt)}</p>
+                  <p className="ml-1 max-[640px]:text-[10px] text-sm text-[rgb(var(--muted))]">{ formatTime(notification.createdAt)}</p>
                 </div>
               </Card>
             ))}

@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import Button from "./button";
 import Input from "./input";
 import { FaSearch } from "react-icons/fa";
+import MultiSelect from "./multi-select";
 
 
 
@@ -34,13 +35,14 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [filteredData, setFilteredData] = useState<T[]>(data)
+    const [selected, setSelected] = useState<string>("");
 
     const tableoptions = [
-        {name:"10" },
-        {name:"15" }, 
-        {name:"20" },
-        {name:"25" },
-        {name:"50" },
+        {value:10 ,label: 10},
+        {value:15, label: 15 }, 
+        {value:20, label: 20 },
+        {value:25, label: 25 },
+        {value:50, label: 50 },
     ]
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
@@ -79,20 +81,14 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
         <section className={`w-full  ${className ?? ""}`}>
             <div className="overflow-x-auto">
             <div className="flex items-center justify-between gap-2  py-4">
-                <div>
-                    <span>Show</span>
-                    <select
-                    value={itemsPerPage}
-                    onChange={(e) => {setItemsPerPage(Number(e.target.value)); setCurrentPage(1);}}
-                     className=" outline-none px-3 py-1 border border-gray-300 rounded-md text-sm bg-white shadow-sm"
-                    >
-                        {tableoptions.map((opt) => (
-                            <option 
-                            value={opt.name} 
-                            key={opt.name} 
-                            className="bg-white outline-none border-none text-gray-700 hover:bg-green-100">{opt.name}</option>
-                        ))}
-                    </select>
+                <div className="flex">
+                    <span className="mr-1">Show</span>
+                    <MultiSelect
+                     value={itemsPerPage}
+                     onChange={setItemsPerPage}
+                     options={tableoptions}
+                     size="sm"
+                   />
                 </div>
                 <div className="flex">
                     <div className="relative w-80">
