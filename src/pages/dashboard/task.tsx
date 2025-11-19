@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Table from "../../components/ui/table";
-import Input from "../../components/ui/input";
-import { FaSearch } from "react-icons/fa";
 import Button from "../../components/ui/button";
 import { toast } from "react-toastify";
 import { BiEdit, BiTrash } from "react-icons/bi";
@@ -44,7 +42,6 @@ const Task : React.FC = () => {
 
     const [editingRow, setEditingRow] = useState<TaskRow | null>(null);
     const [loading, setloading] = useState<boolean>(false)
-    const [searchTerm, setSearchTerm] = useState<string>("");
 
     const [Users, setUsers] = useState <TaskRow[]>(listuser)
 

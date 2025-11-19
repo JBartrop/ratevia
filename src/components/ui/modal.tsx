@@ -23,7 +23,7 @@ const Modal:React.FC<ModalProps> = ({title, isOpen, description, children, onClo
     if (!isOpen) return null;
 
     return (
-            <div onClick={onClose} className="fixed inset-0 duration-300 bg-[rgb(var(--muted))]/50 backdrop-opacity-50 flex justify-center items-center z-50">
+            <div onClick={onClose} className="fixed inset-0 duration-300 bg-black/50 backdrop-opacity-50 flex justify-center items-center z-50">
                 <div onClick={(e) => e.stopPropagation()} className="bg-[rgb(var(--card))] relative inset-0 rounded-lg p-6 sm:w-1/2 w-5/6 max-h-96 animate-fadeIn ">
                     <button
                       onClick={onClose}

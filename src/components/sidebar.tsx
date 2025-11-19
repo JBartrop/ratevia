@@ -69,8 +69,8 @@ const MenuItems: MenuProps[] = [
     },
     {
         id: "5",
-        name: "Acount",
-        link: "/dashboard/account",
+        name: "Users",
+        link: "/dashboard/users",
         icon:  (() => {
             const Icon = MdOutlineAccountCircle as React.ComponentType<{ size?: number }>;
             return <Icon size={20} />;
@@ -117,7 +117,7 @@ const Sidebar: React.FC <SidebarProps> = ({isOpen,toggleOpen}) => {
 
     return(
         <>
-            <section className={`${isOpen ? "w-[3.75rem]" : "w-64"} shadow-lg shadow-gray-400 bg-[rgb(var(--card))] text-[rgb(var(--text))] fixed top-0 left-0 p-4 transition-all duration-300 h-full`}>
+            <section className={`${isOpen ? "w-[3.75rem]" : "w-64"} shadow-lg shadow-[rgb(var(--muted))]/50 bg-[rgb(var(--card))] text-[rgb(var(--text))] fixed top-0 left-0 p-4 transition-all duration-300 h-full`}>
                 {isOpen ? (
                     //collapsed
                     <nav>
@@ -184,7 +184,7 @@ const Sidebar: React.FC <SidebarProps> = ({isOpen,toggleOpen}) => {
                                     const isActive = pathname === item.link;
                                     return(
                                         <li key={index}>
-                                            <Link to={item.link} className={` flex items-center p-1 my-2 hover:text-[rgb(var(--lines))] ${isActive ? "bg-[rgb(var(--primary))] rounded-md" : "bg-transparent"}`}>
+                                            <Link to={item.link} className={` flex items-center p-1 my-2 hover:text-[rgb(var(--lines))] ${isActive ? "bg-[rgb(var(--primary))] rounded-md text-white" : "bg-transparent"}`}>
                                             <span className="mr-2">{item.icon}</span> {item.name}
                                             </Link>
                                         </li>

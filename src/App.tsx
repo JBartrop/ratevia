@@ -63,7 +63,7 @@ const router = createBrowserRouter([
         element:<Notifications />
       },
       {
-        path:"account",
+        path:"users",
         element:<Account />
       },
       {

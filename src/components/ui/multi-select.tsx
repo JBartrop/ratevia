@@ -57,9 +57,9 @@ const MultiSelect = <T extends string | number> ({label, options, value, onChang
                 </div>
 
                 {open && !disabled && (
-                     <div onClick={() => !disabled && setOpen((prev) => !prev)} className="absolute left-0 mt-4 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10 animate-fadeIn">
+                     <div onClick={() => !disabled && setOpen((prev) => !prev)} className="absolute left-0 mt-4 w-full bg-[rgb(var(--background))] border border-[rgb(var(--background))]/30 rounded-lg shadow-lg z-10 animate-fadeIn">
                         {options.map((opt) => (
-                            <div key={opt.value} onClick={(e) => { e.stopPropagation(); onChange(opt.value); setOpen(false);}} className={`px-4 py-2 transition-colors ${value === opt.value ? "text-[rgb(var(--primary))] bg-[rgb(var(--primary))]/50 font-medium" : "hover:bg-gray-100 text-gray-700"} `}>
+                            <div key={opt.value} onClick={(e) => { e.stopPropagation(); onChange(opt.value); setOpen(false);}} className={`px-4 py-2 transition-colors ${value === opt.value ? "text-[rgb(var(--text))] bg-[rgb(var(--primary))]/60 font-medium rounded-lg" : "hover:bg-[rgb(var(--primary))]/30 rounded-lg text-[rgb(var(--text))]"} `}>
                                 {opt.label}
                             </div>
                         ))}

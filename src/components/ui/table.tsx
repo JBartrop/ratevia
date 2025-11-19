@@ -78,7 +78,7 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
     }
     // <p className="text-gray-500">Loading...</p> 
     return(
-        <section className={`w-11/12 m-auto ${className ?? ""}`}>
+        <section className={`w-full m-auto ${className ?? ""}`}>
             <div className="flex items-center max-[640px]:flex-col sm:justify-between gap-2  py-4">
                 <div className="flex items-center">
                     <span className="mr-1">Show</span>
@@ -108,7 +108,7 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
                     </div>
                 </div>
             </div>
-            <div className="mt-10 overflow-x-auto border rounded-lg">
+            <div className=" overflow-x-auto border rounded-lg">
             <table className="min-w-full border-collapse rounded-md">
                 <thead>
                     <tr>
@@ -126,7 +126,7 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
                     
                     {currentItems.length > 0 ? (
                         currentItems.map((row) => (
-                            <tr key={row.id} className="hover:bg-gray-100">
+                            <tr key={row.id} className="hover:bg-[rgb(var(--primary))]/10">
                                 {header.map((col) => (
                                     <td key={col.id}  className="px-4 py-2 border-t text-sm text-[rgb(var(--text))]">
                                         {(row as any)[col.id] ?? "-"}
