@@ -137,9 +137,9 @@ const Sidebar: React.FC <SidebarProps> = ({isOpen,toggleOpen}) => {
                                             <span className="mr-2">{item.icon}</span>
                                             </Link>
 
-                                            <span className="absolute top-0 left-full ml-2 px-2 py-1 text-sm text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 transition">
+                                            {/* <span className="absolute top-0 left-full ml-2 px-2 py-1 text-sm text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 transition">
                                                 {item.name}
-                                            </span>
+                                            </span> */}
                                         </li>
                                     )
                                 })}

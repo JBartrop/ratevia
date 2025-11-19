@@ -18,7 +18,7 @@ const RecentActivities:React.FC<RecentActivity> = ({data}) => {
             {data.length > 0 ? (
                 data.slice(0, 10).map((d) => (
                 <div className="border-b border-[rgb(var(--primary))]/30 p-1" key={d.title}>
-                    <h1 className="sm:text-xl text-base font-bold mt-2">{d.title}</h1>
+                    <h1 className="text-base font-semibold  mt-2">{d.title}</h1>
                     <div className="flex justify-between text-[12px]">
                         <p className="">{d.description}</p>
                         <p className="">{d.date}</p>

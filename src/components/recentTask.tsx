@@ -21,7 +21,7 @@ const RecentTasks:React.FC<RecentTask> = ({data}) => {
                 data.slice(0, 10).map((d) => (
                 <div className="border-b border-[rgb(var(--primary))]/30 p-1 " key={d.title}>
                     <div className="flex justify-between">
-                        <h1 className="sm:text-xl text-base font-bold mt-2">{d.title}</h1>
+                        <h1 className=" text-base font-semibold mt-2">{d.title}</h1>
                         <span className={` 
                             ${d.priority === "high" ? "bg-green-600" :
                             d.priority === "medium" ? "bg-yellow-400" : "bg-gray-400"} m-2 p-1 w-2 h-2 rounded-full`}></span>
