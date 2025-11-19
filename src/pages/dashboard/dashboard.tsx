@@ -61,7 +61,7 @@ const Dashboard: React.FC = () => {
             {/* <p className="text-[rgb(var(--text))] font-bold">hello world</p> */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-6 mb-8">
                 {carditems.map((item) => (
-                    <div className="h-30 p-4 rounded-md m-1  text-[rgb(var(--text))] bg-[rgb(var(--card))] ">
+                    <div key={item.header} className="h-30 p-4 rounded-md m-1  text-[rgb(var(--text))] bg-[rgb(var(--card))] ">
                         <div className="flex items-start justify-between">
                             <div>
                                 <p className="font-semibold">{item.header}</p>

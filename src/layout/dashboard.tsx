@@ -32,9 +32,9 @@ const DashboardLayout: React.FC = () => {
         <ProtectedRoute>
         <section>
             <ScrollToTop />
-            <main className='flex min-h-screen w-full overflow-x-hidden'>
+            <main className='flex flex-1'>
                 <Sidebar isOpen={collapsed} toggleOpen={() => setCollapsed(prev => !prev)} />
-                <div className={`${collapsed ? "ml-[3.75rem]" : "ml-64"} transition-all duration-300 p-4 w-full min-h-screen`}>
+                <div className={`${collapsed ? "pl-20" : "ml-64"} transition-all duration-300 p-4 w-full min-h-screen`}>
                     <Outlet />
                 </div>
                 

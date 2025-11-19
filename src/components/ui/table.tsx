@@ -78,10 +78,9 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
     }
     // <p className="text-gray-500">Loading...</p> 
     return(
-        <section className={`w-full  ${className ?? ""}`}>
-            <div className="overflow-x-auto">
-            <div className="flex items-center justify-between gap-2  py-4">
-                <div className="flex">
+        <section className={`w-11/12 m-auto ${className ?? ""}`}>
+            <div className="flex items-center max-[640px]:flex-col sm:justify-between gap-2  py-4">
+                <div className="flex items-center">
                     <span className="mr-1">Show</span>
                     <MultiSelect
                      value={itemsPerPage}
@@ -91,7 +90,7 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
                    />
                 </div>
                 <div className="flex">
-                    <div className="relative w-80">
+                    <div className="relative max-w-80 w-full">
                     <Input
                         type="text"
                         name=""
@@ -109,7 +108,8 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
                     </div>
                 </div>
             </div>
-            <table className="min-w-full overflow-x-auto border border-gray-200 rounded-md">
+            <div className="mt-10 overflow-x-auto border rounded-lg">
+            <table className="min-w-full border-collapse rounded-md">
                 <thead>
                     <tr>
                         {header.map((h) => (
@@ -133,7 +133,7 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
                                     </td>
                                 ))}
                                 {actions && actions.length > 0 && (
-                                    <td className="px-4 py-2 border-t text-sm text-[rgb(var(--text))] flex justify-end gap-2">
+                                    <td className="px-4 py-2 border-t text-sm text-[rgb(var(--text))] text-right space-x-2 whitespace-nowrap">
                                         {actions.map((action, i) => (
                                           <button
                                             key={i}
@@ -162,10 +162,12 @@ const Table = <T extends { id: string | number }>({loading, header, data, classN
                     
                 </tbody>
             </table>
+            </div>
             <p className="pt-4 text-center text-sm text-[rgb(var(--text))]/50">A list of all data</p>
+            <div className="">
             {(data.length > itemsPerPage || filteredData.length !== data.length)  && (
-                <div className="flex justify-between items-center my-6">
-                    <div>
+                <div className="flex max-[640px]:flex-col sm:justify-between items-center my-6">
+                    <div className="m-2">
                         {searchTerm ? (<div>
                             showing {startItemIndex + 1} to {Math.min(lastItemIndex, filteredData.length)} of {filteredData.length} enteries <span className="text-gray-400 ml-1">from {data.length} total entries </span>;
                         </div>) : (
