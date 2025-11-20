@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import MonthView from "./calendarviews/monthview";
 
 export interface Participant {
   id: string;
@@ -23,18 +24,18 @@ export interface CalendarEvent {
 export type CalendarView = "day" | "week" | "month" | "year" | "schedule";
 
 
-const Schedule:React.FC = () => {
-    const [view, setView ] = useState<CalendarView>("day")
+const ScheduleComp:React.FC = () => {
+    const [view, setView ] = useState<CalendarView>("month")
 
-    // const renderView = () => {
-    //     switch (view) {
+    const renderView = () => {
+        switch (view) {
     //       case "day": return <DayView />;
     //       case "week": return <WeekView />;
-    //       case "month": return <MonthView />;
+          case "month": return <MonthView />;
     //       case "year": return <YearView />;
     //       case "schedule": return <ScheduleView />;
-    //     }
-    // };
+        }
+    };
     return(
         <section>
             <header className="toolbar">
@@ -45,14 +46,14 @@ const Schedule:React.FC = () => {
                 <button onClick={() => setView("schedule")}>Schedule</button>
            </header>
 
-           {/* <main>
+           <main>
                 {renderView()}
            </main>
 
-           <EventDialog /> */}
+           {/* <EventDialog /> */}
             
         </section>
     )
 }
 
-export default Schedule;
+export default ScheduleComp;
